@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Color Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s ease;
+        }
+
+        .color-code {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .start {
+            background: #28a745;
+            color: white;
+        }
+
+        .stop {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="color-code" id="colorCode">#FFFFFF</div>
+    <div>
+        <button class="start" onclick="startColor()">Start</button>
+        <button class="stop" onclick="stopColor()">Stop</button>
+    </div>
+    <script>
+        let interval;
+        function generateRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function changeColor() {
+            const newColor = generateRandomColor();
+            document.body.style.backgroundColor = newColor;
+            document.getElementById("colorCode").textContent = newColor;
+        }
+
+        function startColor() {
+            if (!interval) {
+                interval = setInterval(changeColor, 1000);
+            }
+        }
+
+        function stopColor() {
+            clearInterval(interval);
+            interval = null;
+        }
+
+        changeColor(); 
+    </script>
+</body>
+</html>
