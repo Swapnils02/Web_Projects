@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Navbar</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            padding: 15px 8%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Logo */
+        .logo {
+            color: #fff;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+            transition: 0.4s ease-in-out;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        /* Smooth underline */
+        .nav-links li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 2px;
+            background: #00c3ff;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: #00c3ff;
+        }
+
+        /* Login Button */
+        .login-btn {
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #00c3ff, #00a3d9);
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #00c3ff;
+        }
+
+        /* Hide mobile login on desktop */
+        .mobile-login {
+            display: none;
+        }
+
+        /* Hamburger */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            transition: 0.4s;
+            border-radius: 5px;
+        }
+
+        /* Animate to Cross */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                padding: 30px 0;
+                transform: translateY(-150%);
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.5s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* Hide desktop login */
+            .desktop-login {
+                display: none;
+            }
+
+            /* Show mobile login */
+            .mobile-login {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MyLogo</div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="closeMenu()">Home</a></li>
+            <li><a href="#" onclick="closeMenu()">About</a></li>
+            <li><a href="#" onclick="closeMenu()">Services</a></li>
+            <li><a href="#" onclick="closeMenu()">Contact</a></li>
+            <li class="mobile-login">
+                <button class="login-btn">Login</button>
+            </li>
+        </ul>
+
+        <!-- Desktop Login -->
+        <button class="login-btn desktop-login">Login</button>
+
+        <!-- Hamburger -->
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <script>
+        const navLinks = document.getElementById("navLinks");
+        const menuToggle = document.getElementById("menuToggle");
+
+        function toggleMenu() {
+            navLinks.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove("active");
+            menuToggle.classList.remove("active");
+        }
+    </script>
+
+</body>
+
+</html>
